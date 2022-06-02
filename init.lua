@@ -26,6 +26,9 @@ return require('packer').startup(function(use)
   -- Repeating
   use 'tpope/vim-repeat'
 
+  -- Vim-wiki
+  use 'vimwiki/vimwiki'
+
   -- Git bindings
   use 'tpope/vim-fugitive'
 
