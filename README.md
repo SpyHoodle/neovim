@@ -1,5 +1,5 @@
 # Maddie's NeoVim config
-A clean, fast, feature-rich IDE layer for my needs in [NeoVim](https://neovim.io/).
+A clean, fast, feature-rich IDE layer for my needs in [NeoVim](https://neovim.io/).<br>
 Written in Lua, designed for NeoVim v0.7.0 or higher.
 
 ## Some highlights
@@ -15,3 +15,8 @@ Written in Lua, designed for NeoVim v0.7.0 or higher.
  - Extra configuration for [Neovide](https://github.com/neovide/neovide), a graphical NeoVim client
  - Shortcuts for tabs & splits with the leader key as space
  - System clipboard, mouse and scrolling support
+
+## Work in progress!
+I'm constantly updating and changing this configuration, by adding new plugins and settings.<br>
+I likely won't make changes to make the config more acceptable and general to the public.<br>
+Made with ❤️ and 🏳️‍⚧️.
