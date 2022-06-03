@@ -8,11 +8,11 @@ return require('packer').startup(function(use)
   -- Neovim package manager
   use 'wbthomason/packer.nvim'
 
-  -- Atom One theme
-  use 'rakr/vim-one'
+  -- Atom's One Dark theme
+  use 'navarasu/onedark.nvim'
 
   -- Gruvbox theme
-  use 'morhetz/gruvbox'
+  use 'ellisonleao/gruvbox.nvim'
 
   -- Smooth scrolling
   use 'psliwka/vim-smoothie'

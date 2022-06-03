@@ -18,7 +18,7 @@ vim.api.nvim_set_keymap('n', '<leader>fh', '<cmd>lua require("telescope.builtin"
 
 -- Custom keymaps
 vim.api.nvim_set_keymap('n', '<leader>T', ':sp<CR> :term<CR> :resize 20N<CR> i', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>nh', ':nohl', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>nh', ':nohl<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'U', ':redo<CR>', { noremap = false })
 vim.api.nvim_set_keymap('n', '<C-q>', ':wqa<CR>', { noremap = false })
 vim.api.nvim_set_keymap('n', '<C-s>', ':w<CR>', { noremap = false })
