@@ -14,10 +14,16 @@ return require('packer').startup(function(use)
   -- Gruvbox theme
   use 'ellisonleao/gruvbox.nvim'
 
+  -- VSCode theme
+  use 'Mofiqul/vscode.nvim'
+
+  -- Everforest theme
+  use 'sainnhe/everforest'
+
   -- Smooth scrolling
   use 'psliwka/vim-smoothie'
 
-  -- Comments
+  -- Comments in any language
   use 'tpope/vim-commentary'
 
   -- Surrounding
@@ -29,19 +35,43 @@ return require('packer').startup(function(use)
   -- Vim-wiki
   use 'vimwiki/vimwiki'
 
+  -- Rainbow brackets
+  use 'p00f/nvim-ts-rainbow'
+
   -- Git bindings
   use 'tpope/vim-fugitive'
 
-  -- Github Copilot
-  use 'github/copilot.vim'
+  -- Git signs
+  use {
+    'lewis6991/gitsigns.nvim',
+    config = function()
+      require('gitsigns').setup()
+    end
+  }
 
-  -- Rainbow brackets
-  use 'p00f/nvim-ts-rainbow'
+  -- Github Copilot
+  use {
+    'zbirenbaum/copilot.lua',
+    event = { 'VimEnter' },
+    config = function()
+      vim.defer_fn(function()
+        require('copilot').setup()
+      end, 100)
+    end
+  }
 
   -- Fuzzy finder
   use {
     'nvim-telescope/telescope.nvim',
     requires = { 'nvim-lua/plenary.nvim' }
+  }
+
+  -- Auto-pairs
+  use {
+    'windwp/nvim-autopairs',
+    config = function()
+      require('nvim-autopairs').setup()
+    end
   }
 
   -- Highlight whitespaces
@@ -124,6 +154,7 @@ return require('packer').startup(function(use)
       require('lspconfig').rnix.setup{}
       require('lspconfig').bashls.setup{}
       require('lspconfig').vimls.setup{}
+      require('lspconfig').ccls.setup{}
       require('lspconfig').sumneko_lua.setup {
         settings = {
           Lua = {
@@ -136,8 +167,12 @@ return require('packer').startup(function(use)
     end
   }
 
-  -- Code suggestions
+  -- Code completion
+  use 'L3MON4D3/LuaSnip'
+  use 'rafamadriz/friendly-snippets'
+  use 'zbirenbaum/copilot-cmp'
   use 'hrsh7th/cmp-nvim-lsp'
+  use 'hrsh7th/cmp-nvim-lua'
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/cmp-path'
   use 'hrsh7th/cmp-cmdline'
@@ -145,12 +180,7 @@ return require('packer').startup(function(use)
     'hrsh7th/nvim-cmp',
     requires = { 'kyazdani42/nvim-web-devicons' },
     config = function()
-      require('cmp').setup {
-        sources = {
-          { name = 'nvim_lsp', group_index = 2 },
-          { name = 'path', group_index = 2 },
-        }
-      }
+      require('plugins.cmp')
     end
   }
 
@@ -159,7 +189,7 @@ return require('packer').startup(function(use)
     'nvim-treesitter/nvim-treesitter',
     config = function()
       require('nvim-treesitter.configs').setup {
-        ensure_installed = { 'c', 'lua', 'go', 'rust', 'python', 'nix', 'vim', 'markdown' },
+        ensure_installed = { 'cpp', 'lua', 'go', 'rust', 'python', 'nix', 'vim', 'markdown' },
         sync_install = false,
         highlight = {
           enable = true,
