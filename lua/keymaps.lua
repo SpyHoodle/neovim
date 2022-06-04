@@ -4,9 +4,10 @@ local term_opts = { silent = true }
 local keymap = vim.api.nvim_set_keymap
 
 -- Custom/special keymaps
-keymap('n', '<leader>T', ':sp<CR> :term<CR> :resize 20N<CR> i', term_opts)
+keymap('n', '<leader>c', ':sp<CR> :term<CR> :resize 20N<CR> i', term_opts)
 keymap('n', '<leader>r', ':luafile %<CR>:PackerSync<CR>', term_opts)
 keymap('n', '<leader>h', ':nohl<CR>', term_opts)
+keymap('n', '<C-c>', ':Telescope colorscheme<CR>', term_opts)
 keymap('n', '<C-q>', ':wqa<CR>', term_opts)
 keymap('n', '<C-s>', ':w<CR>', term_opts)
 keymap('n', 'U', ':redo<CR>', term_opts)
@@ -23,7 +24,7 @@ keymap('n', '<leader>to', ':tabo<CR>', opts)
 keymap('n', '<leader>tc', ':tabc<CR>', opts)
 
 -- Window navigation
-keymap('n', '<Tab>', '<C-w>w', opts)
+keymap('n', '<C-Tab>', '<C-w>w', opts)
 keymap('n', '<C-h>', '<C-w>h', opts)
 keymap('n', '<C-j>', '<C-w>j', opts)
 keymap('n', '<C-k>', '<C-w>k', opts)
