@@ -41,6 +41,24 @@ return require('packer').startup(function(use)
   -- Git bindings
   use 'tpope/vim-fugitive'
 
+  -- Transparent background
+  use {
+    'xiyaowong/nvim-transparent',
+    config = function()
+      require('transparent').setup({
+        enable = false;
+      })
+    end
+  }
+
+  -- Zen mode
+  use {
+    "folke/zen-mode.nvim",
+    config = function()
+      require('zen-mode').setup()
+    end
+  }
+
   -- Git signs
   use {
     'lewis6991/gitsigns.nvim',
@@ -154,7 +172,6 @@ return require('packer').startup(function(use)
       require('lspconfig').rnix.setup{}
       require('lspconfig').bashls.setup{}
       require('lspconfig').vimls.setup{}
-      require('lspconfig').ccls.setup{}
       require('lspconfig').sumneko_lua.setup {
         settings = {
           Lua = {
@@ -189,7 +206,7 @@ return require('packer').startup(function(use)
     'nvim-treesitter/nvim-treesitter',
     config = function()
       require('nvim-treesitter.configs').setup {
-        ensure_installed = { 'cpp', 'lua', 'go', 'rust', 'python', 'nix', 'vim', 'markdown' },
+        ensure_installed = { 'cpp', 'lua', 'go', 'rust', 'python', 'nix', 'vim', 'markdown', 'html', 'css' },
         sync_install = false,
         highlight = {
           enable = true,
@@ -198,6 +215,9 @@ return require('packer').startup(function(use)
         rainbow = {
           enable = true,
           extended_mode = true
+        },
+        indent = {
+          enable = true;
         }
       }
     end

@@ -7,6 +7,8 @@ local keymap = vim.api.nvim_set_keymap
 keymap('n', '<leader>c', ':sp<CR> :term<CR> :resize 20N<CR> i', term_opts)
 keymap('n', '<leader>r', ':luafile %<CR>:PackerSync<CR>', term_opts)
 keymap('n', '<leader>h', ':nohl<CR>', term_opts)
+keymap('n', '<leader>z', ':ZenMode<CR>:set wrap<CR>:set linebreak<CR>', term_opts)
+keymap('n', '<leader>Z', ':ZenMode<CR>:set nowrap<CR>:set nolinebreak<CR>', term_opts)
 keymap('n', '<C-c>', ':Telescope colorscheme<CR>', term_opts)
 keymap('n', '<C-q>', ':wqa<CR>', term_opts)
 keymap('n', '<C-s>', ':w<CR>', term_opts)
@@ -37,6 +39,10 @@ keymap('n', '<S-h>', ':bprevious<CR>', opts)
 -- Stay in visual mode when indenting
 keymap('v', '<', '<gv', opts)
 keymap('v', '>', '>gv', opts)
+
+-- When moving up or down, move physical lines not file lines
+keymap('n', 'j', 'gj', opts)
+keymap('n', 'k', 'gk', opts)
 
 -- NvimTree
 keymap('n', '<C-n>', ':NvimTreeToggle<CR>', term_opts)
