@@ -3,8 +3,13 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixvim.url = "github:nix-community/nixvim";
     flake-parts.url = "github:hercules-ci/flake-parts";
+
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.flake-parts.follows = "flake-parts";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -13,35 +18,39 @@
       systems = [
         "x86_64-linux"
         "aarch64-linux"
-        "x86_64-darwin"
         "aarch64-darwin"
       ];
 
       perSystem =
-        { pkgs, system, ... }:
+        { system, ... }:
         let
-          nixvimLib = nixvim.lib.${system};
-          nixvim' = nixvim.legacyPackages.${system};
-          nixvimModule = {
-            inherit pkgs;
-            module = import ./config; # import the module directly
-            # You can use `extraSpecialArgs` to pass additional arguments to your module files
+          configuration = nixvim.lib.evalNixvim {
+            inherit system;
+
+            modules = [
+              ./config
+              ({ lib, ... }: {
+                nixpkgs.source = inputs.nixpkgs;
+                nixpkgs.config.allowUnfreePredicate =
+                  pkg:
+                  builtins.elem (lib.getName pkg) [
+                    "copilot-language-server"
+                    "presence.nvim"
+                  ];
+              })
+            ];
+
             extraSpecialArgs = {
               # inherit (inputs) foo;
             };
           };
-          nvim = nixvim'.makeNixvimWithModule nixvimModule;
         in
         {
-          checks = {
-            # Run `nix flake check .` to verify that your config is not broken
-            default = nixvimLib.check.mkTestDerivationFromNixvimModule nixvimModule;
-          };
+          # Run `nix flake check .` to verify that your config is not broken
+          checks.default = configuration.config.build.test;
 
-          packages = {
-            # Lets you run `nix run .` to start nixvim
-            default = nvim;
-          };
+          # Lets you run `nix run .` to start nixvim
+          packages.default = configuration.config.build.package;
         };
     };
 }

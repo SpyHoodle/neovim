@@ -1,7 +1,10 @@
 {
-  plugins.presence-nvim = {
+  plugins.presence = {
     enable = true;
-    neovimImageText = "Neovim";
-    mainImage = "file";
+
+    settings = {
+      neovim_image_text = "Neovim";
+      main_image = "file";
+    };
   };
 }
